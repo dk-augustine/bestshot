@@ -11,413 +11,295 @@
 <style>
 /* ── Design tokens ────────────────────────────────────────────── */
 :root {
-  --bg:       #f2f2f7;
-  --card:     #ffffff;
-  --card2:    #f2f2f7;
-  --text:     #1c1c1e;
-  --text2:    #6e6e73;
-  --text3:    #aeaeb2;
-  --accent:   #30d158;
-  --blue:     #0a84ff;
-  --orange:   #ff9f0a;
-  --red:      #ff453a;
-  --r:        14px;
-  --shadow:   0 2px 16px rgba(0,0,0,.10);
-  --safe-b:   env(safe-area-inset-bottom, 16px);
+  --bg:    #f2f2f7;
+  --card:  #ffffff;
+  --card2: #f2f2f7;
+  --text:  #1c1c1e;
+  --text2: #6e6e73;
+  --text3: #aeaeb2;
+  --accent:#30d158;
+  --blue:  #0a84ff;
+  --orange:#ff9f0a;
+  --red:   #ff453a;
+  --r:     14px;
+  --shadow:0 2px 16px rgba(0,0,0,.10);
+  --safe-b:env(safe-area-inset-bottom, 16px);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:    #000;
-    --card:  #1c1c1e;
-    --card2: #2c2c2e;
-    --text:  #fff;
-    --text2: #98989d;
-    --text3: #636366;
+    --bg:#000; --card:#1c1c1e; --card2:#2c2c2e;
+    --text:#fff; --text2:#98989d; --text3:#636366;
   }
 }
-
-/* ── Reset ───────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  background:var(--bg);color:var(--text);
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;
 }
-button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-input  { font: inherit; }
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
 /* ── Screens ─────────────────────────────────────────────────── */
-.screen { display: none; min-height: 100dvh; }
-.screen.active { display: flex; flex-direction: column; }
+.screen{display:none;min-height:100dvh}
+.screen.active{display:flex;flex-direction:column}
 
 /* ── Welcome ─────────────────────────────────────────────────── */
-#screen-welcome {
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 40px 24px calc(40px + var(--safe-b));
-  text-align: center;
+#screen-welcome{
+  align-items:center;justify-content:center;gap:0;
+  padding:40px 28px calc(40px + var(--safe-b));
+  text-align:center;
 }
-.app-icon {
-  width: 100px; height: 100px;
-  background: linear-gradient(145deg, #1c1c1e, #3a3a3c);
-  border-radius: 26px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 52px;
-  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+.app-icon{
+  width:88px;height:88px;
+  background:linear-gradient(145deg,#1c1c1e,#3a3a3c);
+  border-radius:22px;display:flex;align-items:center;justify-content:center;
+  font-size:46px;box-shadow:0 8px 32px rgba(0,0,0,.25);margin-bottom:18px;
 }
-.app-title  { font-size: 34px; font-weight: 700; letter-spacing: -.5px; }
-.app-sub    { color: var(--text2); font-size: 16px; line-height: 1.5; max-width: 280px; }
-.btn-primary {
-  background: var(--blue);
-  color: #fff;
-  font-size: 17px; font-weight: 600;
-  padding: 16px 40px;
-  border-radius: 50px;
-  box-shadow: 0 4px 20px rgba(10,132,255,.35);
-  transition: transform .12s, opacity .12s;
+.app-title{font-size:32px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
+.app-sub{color:var(--text2);font-size:15px;line-height:1.5;max-width:280px;margin-bottom:28px}
+
+/* ── Reference face card ─────────────────────────────────────── */
+#ref-face-card{
+  width:100%;max-width:360px;
+  background:var(--card);
+  border-radius:var(--r);
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:10px;
 }
-.btn-primary:active { transform: scale(.96); opacity: .9; }
-.hint { color: var(--text3); font-size: 13px; }
+.ref-card-label{
+  font-size:12px;font-weight:600;letter-spacing:.5px;
+  color:var(--text2);text-transform:uppercase;text-align:left;
+}
+.ref-face-row{
+  display:flex;align-items:center;gap:12px;
+}
+#ref-avatar-wrap{
+  flex-shrink:0;
+  width:60px;height:60px;
+  border-radius:50%;
+  background:var(--card2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;
+  overflow:hidden;
+  border:2px solid var(--card2);
+  position:relative;
+}
+#ref-avatar-wrap img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;
+}
+#ref-face-info{flex:1;text-align:left}
+#ref-face-name{font-size:15px;font-weight:600}
+#ref-face-sub{font-size:13px;color:var(--text2)}
+.btn-ref{
+  font-size:14px;font-weight:600;color:var(--blue);
+  padding:8px 0;
+  border-radius:10px;
+  text-align:center;
+}
+#ref-clear-btn{
+  font-size:13px;font-weight:600;color:var(--red);
+  padding:4px 10px;
+  background:rgba(255,69,58,.1);
+  border-radius:8px;
+  flex-shrink:0;
+}
+
+/* Multi-face picker (shown when reference photo has multiple faces) */
+#ref-face-picker{
+  display:none;gap:8px;flex-wrap:wrap;justify-content:center;
+  padding-top:6px;border-top:1px solid var(--card2);
+}
+#ref-face-picker.visible{display:flex}
+.ref-face-option{
+  width:52px;height:52px;border-radius:50%;
+  object-fit:cover;
+  border:2px solid transparent;
+  cursor:pointer;transition:transform .12s,border-color .12s;
+}
+.ref-face-option.selected{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,.25)}
+.ref-face-option:active{transform:scale(.9)}
+
+/* ── Main buttons ────────────────────────────────────────────── */
+.btn-primary{
+  background:var(--blue);color:#fff;
+  font-size:17px;font-weight:600;
+  padding:16px 40px;border-radius:50px;
+  box-shadow:0 4px 20px rgba(10,132,255,.35);
+  transition:transform .12s,opacity .12s;
+  width:100%;max-width:360px;
+}
+.btn-primary:active{transform:scale(.97);opacity:.9}
+.hint{color:var(--text3);font-size:13px;margin-top:10px}
 
 /* ── Processing ──────────────────────────────────────────────── */
-#screen-processing {
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 40px 24px;
+#screen-processing{
+  align-items:center;justify-content:center;gap:20px;padding:40px 24px;
 }
-.progress-ring-wrap {
-  position: relative;
-  width: 96px; height: 96px;
-}
-.progress-ring-wrap svg { transform: rotate(-90deg); }
-.ring-bg  { fill: none; stroke: var(--card2); stroke-width: 6; }
-.ring-arc { fill: none; stroke: var(--blue); stroke-width: 6; stroke-linecap: round;
-            stroke-dasharray: 283; stroke-dashoffset: 283; transition: stroke-dashoffset .3s; }
-.ring-pct {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; font-weight: 700;
-}
-#proc-title { font-size: 22px; font-weight: 600; }
-#proc-label { color: var(--text2); font-size: 15px; max-width: 260px; text-align: center; }
+.progress-ring-wrap{position:relative;width:96px;height:96px}
+.progress-ring-wrap svg{transform:rotate(-90deg)}
+.ring-bg {fill:none;stroke:var(--card2);stroke-width:6}
+.ring-arc{fill:none;stroke:var(--blue);stroke-width:6;stroke-linecap:round;
+          stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset .3s}
+.ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+          font-size:20px;font-weight:700}
+#proc-title{font-size:22px;font-weight:600}
+#proc-label{color:var(--text2);font-size:15px;max-width:260px;text-align:center}
 
-/* ── Results header ──────────────────────────────────────────── */
-#screen-results { background: var(--bg); }
-#results-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 56px 18px 12px;
-  background: var(--card);
-  border-bottom: 1px solid var(--card2);
-  position: sticky; top: 0; z-index: 10;
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+/* ── Results ─────────────────────────────────────────────────── */
+#screen-results{background:var(--bg)}
+#results-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:56px 18px 12px;
+  background:var(--card);
+  border-bottom:1px solid var(--card2);
+  position:sticky;top:0;z-index:10;
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
 }
-.header-title  { font-size: 22px; font-weight: 700; }
-.header-btns   { display: flex; gap: 10px; }
-.icon-btn {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: var(--card2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-  transition: transform .12s;
+.header-title{font-size:22px;font-weight:700}
+.header-btns{display:flex;gap:10px}
+.icon-btn{
+  width:34px;height:34px;border-radius:50%;background:var(--card2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:transform .12s;
 }
-.icon-btn:active { transform: scale(.88); }
-.icon-btn.active { background: var(--blue); color: #fff; }
+.icon-btn:active{transform:scale(.88)}
+.icon-btn.active{background:var(--blue);color:#fff}
 
-#results-stats {
-  padding: 10px 18px 6px;
-  font-size: 13px;
-  color: var(--text2);
+#results-stats{padding:10px 18px 6px;font-size:13px;color:var(--text2)}
+
+/* Reference face indicator in results */
+#ref-indicator{
+  display:none;
+  margin:0 14px 8px;
+  background:rgba(10,132,255,.1);
+  border:1px solid rgba(10,132,255,.25);
+  border-radius:var(--r);
+  padding:10px 14px;
+  align-items:center;gap:10px;
 }
-#face-banner {
-  margin: 0 14px 8px;
-  background: rgba(10,132,255,.12);
-  border: 1px solid rgba(10,132,255,.3);
-  border-radius: var(--r);
-  padding: 10px 14px;
-  display: none;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
+#ref-indicator.visible{display:flex}
+#ref-indicator img{
+  width:36px;height:36px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--blue);
 }
-#face-banner.visible { display: flex; }
-#face-banner-text { flex: 1; }
-#face-banner-clear {
-  font-size: 13px; font-weight: 600;
-  color: var(--red);
-  padding: 4px 8px;
+#ref-indicator-text{flex:1;font-size:14px}
+#ref-indicator-text strong{display:block;font-size:13px;color:var(--blue)}
+.btn-change-face{
+  font-size:12px;font-weight:600;color:var(--text2);
+  padding:4px 8px;background:var(--card2);border-radius:8px;
 }
 
-/* ── Groups container ────────────────────────────────────────── */
-#groups-container {
-  padding: 10px 14px calc(24px + var(--safe-b));
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+/* ── Groups ──────────────────────────────────────────────────── */
+#groups-container{
+  padding:10px 14px calc(24px + var(--safe-b));
+  display:flex;flex-direction:column;gap:14px;
+}
+.group-card{
+  background:var(--card);border-radius:var(--r);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.group-header{
+  padding:12px 14px 8px;display:flex;
+  align-items:center;justify-content:space-between;
+}
+.group-meta{font-size:13px;color:var(--text2)}
+.group-title{font-size:16px;font-weight:600}
+.group-badge{
+  font-size:12px;font-weight:700;padding:3px 10px;
+  border-radius:50px;background:rgba(48,209,88,.15);color:var(--accent);
+}
+.group-badge.face-match{background:rgba(10,132,255,.15);color:var(--blue)}
+
+.photo-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:2px;padding:0 2px 2px;
+}
+.photo-thumb-wrap{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer}
+.photo-thumb-wrap img{
+  width:100%;height:100%;object-fit:cover;display:block;transition:opacity .2s;
+}
+.photo-thumb-wrap.best::after{
+  content:'';position:absolute;inset:0;
+  border:3px solid var(--accent);border-radius:2px;pointer-events:none;
+}
+.photo-thumb-wrap.best.face-best::after{border-color:var(--blue)}
+.photo-thumb-wrap.discard img{opacity:.4}
+.photo-thumb-wrap.discard::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,69,58,.15);pointer-events:none;
 }
 
-/* ── Group card ──────────────────────────────────────────────── */
-.group-card {
-  background: var(--card);
-  border-radius: var(--r);
-  overflow: hidden;
-  box-shadow: var(--shadow);
+.score-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.65));
+  padding:16px 6px 5px;
+  display:flex;align-items:flex-end;justify-content:space-between;
 }
-.group-header {
-  padding: 12px 14px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.score-pct{font-size:12px;font-weight:700;color:#fff}
+.score-bars{display:flex;gap:2px;align-items:flex-end;height:14px}
+.sbar{width:5px;border-radius:2px;background:rgba(255,255,255,.25);position:relative;overflow:hidden}
+.sbar-fill{position:absolute;bottom:0;left:0;right:0;border-radius:2px;transition:height .4s ease}
+
+.best-badge{
+  position:absolute;top:5px;right:5px;
+  background:var(--accent);color:#fff;
+  font-size:9px;font-weight:900;padding:2px 6px;border-radius:50px;letter-spacing:.5px;
 }
-.group-meta  { font-size: 13px; color: var(--text2); }
-.group-title { font-size: 16px; font-weight: 600; }
-.group-badge {
-  font-size: 12px; font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 50px;
-  background: rgba(48,209,88,.15);
-  color: var(--accent);
-}
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 2px;
-  padding: 0 2px 2px;
-}
-.photo-thumb-wrap {
-  position: relative;
-  aspect-ratio: 1;
-  overflow: hidden;
-  cursor: pointer;
-}
-.photo-thumb-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity .2s;
-}
-/* Best = green ring */
-.photo-thumb-wrap.best::after {
-  content: '';
-  position: absolute; inset: 0;
-  border: 3px solid var(--accent);
-  border-radius: 2px;
-  pointer-events: none;
-}
-/* Delete candidate = red tint */
-.photo-thumb-wrap.discard img { opacity: .45; }
-.photo-thumb-wrap.discard::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(255,69,58,.18);
-  pointer-events: none;
+.best-badge.face-best{background:var(--blue)}
+.face-match-badge{
+  position:absolute;top:5px;left:5px;
+  background:rgba(10,132,255,.85);color:#fff;
+  font-size:10px;padding:2px 5px;border-radius:50px;
 }
 
-/* Score overlay (bottom of each thumb) */
-.score-overlay {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,.65));
-  padding: 16px 6px 5px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+.group-footer{
+  padding:10px 14px 12px;display:flex;gap:8px;border-top:1px solid var(--card2);
 }
-.score-pct {
-  font-size: 12px; font-weight: 700;
-  color: #fff;
+.btn-keep{
+  flex:1;padding:10px;border-radius:10px;
+  background:rgba(48,209,88,.12);color:var(--accent);
+  font-size:14px;font-weight:600;text-align:center;
 }
-.score-bars {
-  display: flex;
-  gap: 2px;
-  align-items: flex-end;
-  height: 14px;
-}
-.sbar {
-  width: 5px;
-  border-radius: 2px;
-  background: rgba(255,255,255,.3);
-  position: relative;
-  overflow: hidden;
-}
-.sbar-fill {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  border-radius: 2px;
-  transition: height .4s ease;
-}
+.btn-keep:active{opacity:.7}
 
-/* "BEST" badge */
-.best-badge {
-  position: absolute; top: 5px; right: 5px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 9px; font-weight: 900;
-  padding: 2px 6px;
-  border-radius: 50px;
-  letter-spacing: .5px;
+/* ── Lightbox ────────────────────────────────────────────────── */
+#lightbox{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.92);z-index:100;
+  flex-direction:column;align-items:center;justify-content:center;padding:20px;
 }
-/* Face badge */
-.face-badge {
-  position: absolute; top: 5px; left: 5px;
-  background: rgba(10,132,255,.85);
-  color: #fff;
-  font-size: 10px;
-  padding: 2px 5px;
-  border-radius: 50px;
+#lightbox.open{display:flex}
+#lightbox-img{max-width:100%;max-height:58dvh;object-fit:contain;border-radius:8px}
+#lightbox-score{
+  margin-top:14px;background:var(--card);
+  border-radius:var(--r);padding:16px;width:100%;max-width:380px;
 }
-
-/* Spinner while scoring */
-.scoring-spinner {
-  position: absolute; inset: 0;
-  background: var(--card);
-  display: flex; align-items: center; justify-content: center;
+#lightbox-close{
+  position:absolute;top:56px;right:20px;
+  width:32px;height:32px;background:rgba(255,255,255,.15);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:#fff;
 }
-
-/* Group footer actions */
-.group-footer {
-  padding: 10px 14px 12px;
-  display: flex;
-  gap: 8px;
-  border-top: 1px solid var(--card2);
-}
-.btn-keep {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgba(48,209,88,.15);
-  color: var(--accent);
-  font-size: 14px; font-weight: 600;
-  text-align: center;
-}
-.btn-keep:active { opacity: .7; }
-.btn-expand {
-  padding: 10px 14px;
-  border-radius: 10px;
-  background: var(--card2);
-  color: var(--text2);
-  font-size: 13px; font-weight: 600;
-}
-
-/* ── Photo lightbox ──────────────────────────────────────────── */
-#lightbox {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.92);
-  z-index: 100;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-#lightbox.open { display: flex; }
-#lightbox-img  {
-  max-width: 100%; max-height: 60dvh;
-  object-fit: contain;
-  border-radius: 8px;
-}
-#lightbox-score {
-  margin-top: 16px;
-  background: var(--card);
-  border-radius: var(--r);
-  padding: 16px;
-  width: 100%; max-width: 380px;
-}
-#lightbox-close {
-  position: absolute; top: 56px; right: 20px;
-  width: 32px; height: 32px;
-  background: rgba(255,255,255,.15);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; color: #fff;
-}
-.score-row {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 12px;
-}
-.score-row:last-child { margin-bottom: 0; }
-.score-icon { font-size: 16px; width: 24px; text-align: center; }
-.score-bar-wrap { flex: 1; }
-.score-label { font-size: 13px; font-weight: 500; margin-bottom: 4px; display: flex; justify-content: space-between; }
-.score-track {
-  height: 6px; border-radius: 3px;
-  background: var(--card2);
-  overflow: hidden;
-}
-.score-fill {
-  height: 100%; border-radius: 3px;
-  transition: width .5s ease;
-}
-
-/* ── Face picker modal ───────────────────────────────────────── */
-#face-modal {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.6);
-  z-index: 200;
-  align-items: flex-end;
-}
-#face-modal.open { display: flex; }
-#face-sheet {
-  background: var(--card);
-  width: 100%;
-  border-radius: 20px 20px 0 0;
-  padding: 20px 20px calc(20px + var(--safe-b));
-  max-height: 75dvh;
-  overflow-y: auto;
-}
-.sheet-handle {
-  width: 40px; height: 4px;
-  background: var(--text3);
-  border-radius: 2px;
-  margin: 0 auto 16px;
-}
-.sheet-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-.sheet-sub   { font-size: 14px; color: var(--text2); margin-bottom: 16px; }
-#face-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-  gap: 10px;
-}
-.face-cell {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-}
-.face-avatar {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--card2);
-  cursor: pointer;
-  transition: transform .15s, border-color .15s;
-}
-.face-avatar:active { transform: scale(.92); }
-.face-cell.selected .face-avatar { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(10,132,255,.3); }
-.face-loading { color: var(--text2); font-size: 14px; text-align: center; padding: 24px; }
+.score-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.score-row:last-child{margin-bottom:0}
+.score-icon{font-size:16px;width:22px;text-align:center}
+.score-bar-wrap{flex:1}
+.score-label{font-size:13px;font-weight:500;margin-bottom:4px;display:flex;justify-content:space-between}
+.score-track{height:6px;border-radius:3px;background:var(--card2);overflow:hidden}
+.score-fill{height:100%;border-radius:3px;transition:width .5s ease}
 
 /* ── Empty state ─────────────────────────────────────────────── */
-#empty-state {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 60px 32px;
-  text-align: center;
+#empty-state{
+  display:none;flex-direction:column;align-items:center;
+  justify-content:center;gap:14px;padding:60px 32px;text-align:center;
 }
-#empty-state.visible { display: flex; }
-.empty-icon { font-size: 56px; }
-.empty-title { font-size: 22px; font-weight: 700; }
-.empty-sub   { color: var(--text2); font-size: 15px; line-height: 1.5; }
-
-/* ── Utilities ───────────────────────────────────────────────── */
-.hidden { display: none !important; }
+#empty-state.visible{display:flex}
+.empty-icon{font-size:56px}
+.empty-title{font-size:22px;font-weight:700}
+.empty-sub{color:var(--text2);font-size:15px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -426,11 +308,32 @@ input  { font: inherit; }
 <div id="screen-welcome" class="screen active">
   <div class="app-icon">📸</div>
   <h1 class="app-title">BestShot</h1>
-  <p class="app-sub">Select your similar photos and we'll score each one to find the best of the batch.</p>
+  <p class="app-sub">Score your similar photos and find the best one — with optional face focus.</p>
+
+  <!-- Reference face card -->
+  <div id="ref-face-card">
+    <div class="ref-card-label">Focus face (optional)</div>
+    <div class="ref-face-row">
+      <div id="ref-avatar-wrap">🙂</div>
+      <div id="ref-face-info">
+        <div id="ref-face-name">No face set</div>
+        <div id="ref-face-sub">Best photo chosen by sharpness &amp; exposure</div>
+      </div>
+      <button id="ref-clear-btn" style="display:none" onclick="clearRefFace()">✕</button>
+    </div>
+    <!-- Multi-face picker if reference photo has >1 face -->
+    <div id="ref-face-picker"></div>
+    <button class="btn-ref" onclick="document.getElementById('ref-input').click()">
+      📷 Load a photo of the person to prioritise
+    </button>
+    <input id="ref-input" type="file" accept="image/*" style="display:none"
+           onchange="handleRefFace(this.files[0])">
+  </div>
+
   <button class="btn-primary" onclick="document.getElementById('file-input').click()">
-    Choose Photos
+    Choose Photos to Analyse
   </button>
-  <p class="hint">Select multiple photos at once · Works with bursts & duplicates</p>
+  <p class="hint">Select multiple photos · bursts &amp; near-duplicates</p>
   <input id="file-input" type="file" accept="image/*" multiple style="display:none"
          onchange="handleFiles(this.files)">
 </div>
@@ -439,7 +342,7 @@ input  { font: inherit; }
 <div id="screen-processing" class="screen">
   <div class="progress-ring-wrap">
     <svg width="96" height="96" viewBox="0 0 96 96">
-      <circle class="ring-bg"  cx="48" cy="48" r="45"/>
+      <circle class="ring-bg" cx="48" cy="48" r="45"/>
       <circle class="ring-arc" cx="48" cy="48" r="45" id="ring-arc"/>
     </svg>
     <div class="ring-pct" id="ring-pct">0%</div>
@@ -453,54 +356,44 @@ input  { font: inherit; }
   <div id="results-header">
     <div class="header-title">BestShot</div>
     <div class="header-btns">
-      <button class="icon-btn" id="face-btn" title="Find by face" onclick="openFaceModal()">👤</button>
       <button class="icon-btn" title="New photos" onclick="resetApp()">↑</button>
     </div>
   </div>
   <div id="results-stats"></div>
 
-  <!-- Face filter banner -->
-  <div id="face-banner">
-    <span>👤</span>
-    <span id="face-banner-text"></span>
-    <button id="face-banner-clear" onclick="clearFaceFilter()">Clear</button>
+  <!-- Reference face indicator -->
+  <div id="ref-indicator">
+    <img id="ref-indicator-img" src="" alt="">
+    <div id="ref-indicator-text">
+      <strong id="ref-indicator-count"></strong>
+      Scoring prioritises this person's photos
+    </div>
+    <button class="btn-change-face" onclick="resetApp()">Change</button>
   </div>
 
   <div id="groups-container"></div>
   <div id="empty-state">
     <div class="empty-icon">✅</div>
     <div class="empty-title">No duplicates found</div>
-    <div class="empty-sub">We didn't find any groups of similar photos in your selection.</div>
+    <div class="empty-sub">No groups of similar photos were found in your selection.</div>
     <button class="btn-primary" style="margin-top:8px" onclick="resetApp()">Try Again</button>
   </div>
 </div>
 
-<!-- ══ Photo lightbox ═════════════════════════════════════════ -->
-<div id="lightbox" onclick="closeLightbox()">
+<!-- ══ Lightbox ═══════════════════════════════════════════════ -->
+<div id="lightbox">
   <button id="lightbox-close" onclick="closeLightbox()">✕</button>
   <img id="lightbox-img" src="" alt="">
   <div id="lightbox-score"></div>
 </div>
 
-<!-- ══ Face picker sheet ══════════════════════════════════════ -->
-<div id="face-modal" onclick="e => { if(e.target===this) closeFaceModal(); }">
-  <div id="face-sheet" onclick="event.stopPropagation()">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">Find by Face</div>
-    <div class="sheet-sub">Tap a person to see only batches containing them</div>
-    <div id="face-grid"><div class="face-loading">Detecting faces…</div></div>
-  </div>
-</div>
-
-<!-- ══ CDN libraries (loaded async) ══════════════════════════ -->
+<!-- ══ CDN ════════════════════════════════════════════════════ -->
 <script>
-// Load exifr for EXIF date reading
-(function() {
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js';
-  s.async = true; document.head.appendChild(s);
+(function(){
+  var s=document.createElement('script');
+  s.src='https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js';
+  s.async=true; document.head.appendChild(s);
 })();
-// face-api.js — loaded on demand in loadFaceModels()
 </script>
 
 <script>
@@ -510,143 +403,261 @@ input  { font: inherit; }
 // STATE
 // ══════════════════════════════════════════════════════════════
 const S = {
-  photos:  [],   // { file, url, date, pHash, score }
-  groups:  [],   // [ [photo, …], … ]  sorted newest-first
-  faceDescriptors: [],  // [ { url, descriptor, crop } ]
-  referenceFace: null,
+  photos: [],
+  groups: [],
+  // Reference face set on welcome screen
+  referenceFace: null,        // Float32Array descriptor
+  referenceCropUrl: null,     // data URL of cropped face (for UI)
   faceModelsLoaded: false,
   faceModelsLoading: false,
 };
 
 // ══════════════════════════════════════════════════════════════
-// SCORING ALGORITHMS  (all Canvas / pure JS, no CDN needed)
+// SCORING  (Canvas / pure JS — no CDN needed)
 // ══════════════════════════════════════════════════════════════
 
 function computeSharpness(imageData) {
-  const { data, width, height } = imageData;
-  // Convert to grayscale
+  const {data, width, height} = imageData;
   const g = new Float32Array(width * height);
-  for (let i = 0; i < g.length; i++) {
+  for (let i=0; i<g.length; i++)
     g[i] = 0.299*data[i*4] + 0.587*data[i*4+1] + 0.114*data[i*4+2];
-  }
-  // Laplacian variance
   let sum=0, sumSq=0, n=0;
-  for (let y=1; y<height-1; y++) {
+  for (let y=1; y<height-1; y++)
     for (let x=1; x<width-1; x++) {
       const c=g[y*width+x], t=g[(y-1)*width+x], b=g[(y+1)*width+x],
             l=g[y*width+x-1], r=g[y*width+x+1];
-      const lap = t+b+l+r - 4*c;
-      sum += lap; sumSq += lap*lap; n++;
+      const lap=t+b+l+r-4*c;
+      sum+=lap; sumSq+=lap*lap; n++;
     }
-  }
   if (!n) return 0.5;
-  const variance = sumSq/n - (sum/n)**2;
-  return Math.min(Math.sqrt(variance / 400), 1.0);
+  return Math.min(Math.sqrt((sumSq/n-(sum/n)**2)/400), 1.0);
 }
 
 function computeExposure(imageData) {
-  const { data, width, height } = imageData;
-  const n = width * height;
-  let totalLuma=0, dark=0, bright=0;
+  const {data, width, height} = imageData;
+  const n=width*height;
+  let luma=0, dark=0, bright=0;
   for (let i=0; i<n; i++) {
-    const luma = 0.299*data[i*4] + 0.587*data[i*4+1] + 0.114*data[i*4+2];
-    totalLuma += luma;
-    if (luma < 30)  dark++;
-    if (luma > 225) bright++;
+    const l=0.299*data[i*4]+0.587*data[i*4+1]+0.114*data[i*4+2];
+    luma+=l;
+    if (l<30) dark++; if (l>225) bright++;
   }
-  const avg = totalLuma / n;
-  const clip = Math.min((dark+bright)/n * 2, 0.5);
+  const avg=luma/n, clip=Math.min((dark+bright)/n*2, 0.5);
   let s;
-  if      (avg < 60)  s = avg/60 * 0.65;
-  else if (avg < 100) s = 0.65 + (avg-60)/40 * 0.20;
-  else if (avg < 160) s = 0.85 + (1 - Math.abs(avg-130)/30) * 0.15;
-  else if (avg < 200) s = 0.85 - (avg-160)/40 * 0.15;
-  else                s = Math.max(0.4, 0.70 - (avg-200)/55*0.30);
-  return Math.max(0, Math.min(1, s - clip));
+  if      (avg<60)  s=avg/60*0.65;
+  else if (avg<100) s=0.65+(avg-60)/40*0.20;
+  else if (avg<160) s=0.85+(1-Math.abs(avg-130)/30)*0.15;
+  else if (avg<200) s=0.85-(avg-160)/40*0.15;
+  else              s=Math.max(0.4, 0.70-(avg-200)/55*0.30);
+  return Math.max(0, Math.min(1, s-clip));
 }
 
 function computeComposition(imageData) {
-  // Centre-weighted: check if bright saliency is near the centre or rule-of-thirds
-  const { data, width, height } = imageData;
-  const cw = width, ch = height;
+  const {data, width, height} = imageData;
   let wx=0, wy=0, wt=0;
-  const step = 4; // sample every 4th pixel
-  for (let y=0; y<ch; y+=step) {
-    for (let x=0; x<cw; x+=step) {
-      const i = (y*cw+x)*4;
-      const luma = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
-      wx += x * luma; wy += y * luma; wt += luma;
+  for (let y=0; y<height; y+=4)
+    for (let x=0; x<width; x+=4) {
+      const i=(y*width+x)*4;
+      const l=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+      wx+=x*l; wy+=y*l; wt+=l;
     }
-  }
   if (!wt) return 0.5;
-  const cx = (wx/wt) / cw, cy = (wy/wt) / ch; // normalised centroid
-  const dist = Math.sqrt((cx-0.5)**2 + (cy-0.5)**2);
-  const centreScore = Math.max(0, 1 - dist * 2.0);
-  // Rule-of-thirds bonus
-  const tx = Math.min(Math.abs(cx-0.333), Math.abs(cx-0.667));
-  const ty = Math.min(Math.abs(cy-0.333), Math.abs(cy-0.667));
-  const thirds = Math.max(0, 0.15 - (tx+ty)*0.5);
-  return Math.min(1, centreScore*0.7 + thirds + 0.1);
+  const cx=(wx/wt)/width, cy=(wy/wt)/height;
+  const dist=Math.sqrt((cx-.5)**2+(cy-.5)**2);
+  const thirds=Math.max(0, .15-(Math.min(Math.abs(cx-.333),Math.abs(cx-.667))+
+                                  Math.min(Math.abs(cy-.333),Math.abs(cy-.667)))*.5);
+  return Math.min(1, Math.max(0, 1-dist*2)*0.7+thirds+0.1);
 }
 
 function computePerceptualHash(img) {
-  const c = document.createElement('canvas');
-  c.width = c.height = 8;
-  const ctx = c.getContext('2d');
-  ctx.drawImage(img, 0, 0, 8, 8);
-  const d = ctx.getImageData(0, 0, 8, 8).data;
-  const px = [];
-  for (let i=0; i<64; i++) {
-    px.push(0.299*d[i*4] + 0.587*d[i*4+1] + 0.114*d[i*4+2]);
-  }
-  const avg = px.reduce((a,b)=>a+b,0)/64;
-  let hash = BigInt(0);
-  px.forEach((v,i) => { if (v >= avg) hash |= (BigInt(1) << BigInt(i)); });
-  return hash;
+  const c=document.createElement('canvas'); c.width=c.height=8;
+  const ctx=c.getContext('2d'); ctx.drawImage(img,0,0,8,8);
+  const d=ctx.getImageData(0,0,8,8).data;
+  const px=[]; for (let i=0;i<64;i++) px.push(.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2]);
+  const avg=px.reduce((a,b)=>a+b,0)/64;
+  let h=BigInt(0); px.forEach((v,i)=>{ if(v>=avg) h|=(BigInt(1)<<BigInt(i)); });
+  return h;
 }
 
-function hammingDistance(a, b) {
-  let x = a ^ b, c = 0;
-  while (x) { c += Number(x & BigInt(1)); x >>= BigInt(1); }
-  return c;
+function hammingDistance(a,b) {
+  let x=a^b,c=0; while(x){c+=Number(x&BigInt(1));x>>=BigInt(1);} return c;
+}
+
+function computeOverall(s) {
+  // If reference face set and this photo matches, weight face heavily
+  if (s.faceMatchScore !== undefined && s.faceMatchScore !== null) {
+    return s.sharpness*.20 + s.exposure*.20 + s.faceMatchScore*.30
+         + (s.faceQuality||0)*.20 + s.composition*.10;
+  }
+  // If we detected faces but no reference, use face quality
+  if (s.faceQuality !== null && s.faceCount > 0) {
+    return s.sharpness*.25 + s.exposure*.25 + s.faceQuality*.35 + s.composition*.15;
+  }
+  return s.sharpness*.35 + s.exposure*.35 + s.composition*.30;
 }
 
 // ══════════════════════════════════════════════════════════════
-// IMAGE LOADING
+// IMAGE UTILITIES
 // ══════════════════════════════════════════════════════════════
 
 function loadImg(src) {
-  return new Promise((res, rej) => {
-    const img = new Image();
-    img.onload = () => res(img);
-    img.onerror = rej;
-    img.src = src;
+  return new Promise((res,rej)=>{
+    const img=new Image(); img.onload=()=>res(img); img.onerror=rej; img.src=src;
   });
 }
 
-function getAnalysisCanvas(img, maxDim = 256) {
-  const scale = Math.min(maxDim/img.naturalWidth, maxDim/img.naturalHeight, 1);
-  const w = Math.max(3, Math.round(img.naturalWidth  * scale));
-  const h = Math.max(3, Math.round(img.naturalHeight * scale));
-  const c = document.createElement('canvas');
-  c.width = w; c.height = h;
-  c.getContext('2d').drawImage(img, 0, 0, w, h);
-  return c;
+function getCanvas(img, maxDim=256) {
+  const s=Math.min(maxDim/img.naturalWidth, maxDim/img.naturalHeight, 1);
+  const w=Math.max(3,Math.round(img.naturalWidth*s)), h=Math.max(3,Math.round(img.naturalHeight*s));
+  const c=document.createElement('canvas'); c.width=w; c.height=h;
+  c.getContext('2d').drawImage(img,0,0,w,h); return c;
 }
-
-// ══════════════════════════════════════════════════════════════
-// EXIF DATE READING
-// ══════════════════════════════════════════════════════════════
 
 async function getPhotoDate(file) {
   try {
     if (window.exifr) {
-      const ex = await exifr.parse(file, ['DateTimeOriginal', 'CreateDate', 'DateTime']);
-      const d = ex?.DateTimeOriginal || ex?.CreateDate || ex?.DateTime;
+      const ex=await exifr.parse(file,['DateTimeOriginal','CreateDate','DateTime']);
+      const d=ex?.DateTimeOriginal||ex?.CreateDate||ex?.DateTime;
       if (d instanceof Date && !isNaN(d)) return d;
     }
   } catch(e) {}
-  return new Date(file.lastModified || Date.now());
+  return new Date(file.lastModified||Date.now());
+}
+
+// ══════════════════════════════════════════════════════════════
+// FACE MODELS  (face-api.js, loaded on demand)
+// ══════════════════════════════════════════════════════════════
+
+const MODEL_URL='https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights';
+
+async function loadFaceModels() {
+  if (S.faceModelsLoaded) return true;
+  if (S.faceModelsLoading) {
+    while (S.faceModelsLoading) await delay(200);
+    return S.faceModelsLoaded;
+  }
+  S.faceModelsLoading=true;
+  try {
+    if (!window.faceapi) {
+      await new Promise((res,rej)=>{
+        const s=document.createElement('script');
+        s.src='https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js';
+        s.onload=res; s.onerror=rej; document.head.appendChild(s);
+      });
+    }
+    await Promise.all([
+      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+      faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),
+      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+    ]);
+    S.faceModelsLoaded=true; S.faceModelsLoading=false; return true;
+  } catch(e) { S.faceModelsLoading=false; return false; }
+}
+
+// Detect faces and return { descriptor, cropDataUrl } for each
+async function detectFaces(img) {
+  const results = await faceapi
+    .detectAllFaces(img, new faceapi.TinyFaceDetectorOptions({scoreThreshold:.40}))
+    .withFaceLandmarks(true)
+    .withFaceDescriptors();
+  return results.map(r => {
+    const box=r.detection.box;
+    const pad=0.35;
+    const c=document.createElement('canvas'); c.width=c.height=72;
+    const ctx=c.getContext('2d');
+    ctx.beginPath(); ctx.arc(36,36,36,0,Math.PI*2); ctx.clip();
+    ctx.drawImage(img,
+      box.x-box.width*pad, box.y-box.height*pad,
+      box.width*(1+2*pad), box.height*(1+2*pad),
+      0,0,72,72);
+    return { descriptor: r.descriptor, cropUrl: c.toDataURL(), score: r.detection.score };
+  });
+}
+
+// ══════════════════════════════════════════════════════════════
+// REFERENCE FACE WORKFLOW (welcome screen)
+// ══════════════════════════════════════════════════════════════
+
+async function handleRefFace(file) {
+  if (!file) return;
+  const url=URL.createObjectURL(file);
+  const avatarWrap=document.getElementById('ref-avatar-wrap');
+  avatarWrap.innerHTML='<div style="font-size:20px;animation:spin 1s linear infinite">⏳</div>';
+
+  // Load models
+  document.getElementById('ref-face-name').textContent='Loading face AI…';
+  document.getElementById('ref-face-sub').textContent='~6 MB, one-time download';
+
+  const ok=await loadFaceModels();
+  if (!ok) {
+    avatarWrap.innerHTML='🚫';
+    document.getElementById('ref-face-name').textContent='Could not load face AI';
+    document.getElementById('ref-face-sub').textContent='Check internet connection and retry';
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  const img=await loadImg(url);
+  URL.revokeObjectURL(url);
+  const faces=await detectFaces(img);
+
+  if (!faces.length) {
+    avatarWrap.innerHTML='🤷';
+    document.getElementById('ref-face-name').textContent='No face found';
+    document.getElementById('ref-face-sub').textContent='Try a clearer, front-on photo';
+    return;
+  }
+
+  if (faces.length === 1) {
+    // Perfect — exactly one face
+    setReferenceFace(faces[0]);
+  } else {
+    // Multiple faces — let user pick
+    document.getElementById('ref-face-name').textContent=`${faces.length} faces found — tap the right one`;
+    document.getElementById('ref-face-sub').textContent='';
+    avatarWrap.innerHTML='❓';
+
+    const picker=document.getElementById('ref-face-picker');
+    picker.innerHTML=faces.map((f,i)=>
+      `<img class="ref-face-option" src="${f.cropUrl}" onclick="pickRefFace(${i})">`
+    ).join('');
+    picker.classList.add('visible');
+    // Store temporarily
+    S._pendingFaces=faces;
+  }
+
+  // Reset file input so same file can be re-selected
+  document.getElementById('ref-input').value='';
+}
+
+function pickRefFace(i) {
+  const face=S._pendingFaces[i];
+  document.querySelectorAll('.ref-face-option').forEach((el,j)=>
+    el.classList.toggle('selected', j===i));
+  setReferenceFace(face);
+}
+
+function setReferenceFace(face) {
+  S.referenceFace=face.descriptor;
+  S.referenceCropUrl=face.cropUrl;
+
+  // Update welcome card
+  document.getElementById('ref-avatar-wrap').innerHTML=
+    `<img src="${face.cropUrl}" style="width:100%;height:100%;object-fit:cover">`;
+  document.getElementById('ref-face-name').textContent='Face set ✓';
+  document.getElementById('ref-face-sub').textContent='Best photo will prioritise this person';
+  document.getElementById('ref-clear-btn').style.display='block';
+  document.getElementById('ref-face-picker').classList.remove('visible');
+}
+
+function clearRefFace() {
+  S.referenceFace=null; S.referenceCropUrl=null; S._pendingFaces=null;
+  document.getElementById('ref-avatar-wrap').innerHTML='🙂';
+  document.getElementById('ref-face-name').textContent='No face set';
+  document.getElementById('ref-face-sub').textContent='Best photo chosen by sharpness & exposure';
+  document.getElementById('ref-clear-btn').style.display='none';
+  document.getElementById('ref-face-picker').classList.remove('visible');
+  document.getElementById('ref-face-picker').innerHTML='';
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -655,162 +666,19 @@ async function getPhotoDate(file) {
 
 function groupPhotos(photos) {
   if (!photos.length) return [];
-  const sorted = [...photos].sort((a,b) => a.date - b.date);
-  const groups = [];
-  let current = [sorted[0]];
-
+  const sorted=[...photos].sort((a,b)=>a.date-b.date);
+  const groups=[]; let cur=[sorted[0]];
   for (let i=1; i<sorted.length; i++) {
-    const prev = sorted[i-1], curr = sorted[i];
-    const dt = (curr.date - prev.date) / 1000; // seconds
-
-    if (dt <= 6) {
-      const hd = (prev.pHash && curr.pHash)
-        ? hammingDistance(prev.pHash, curr.pHash)
-        : 0;
-      if (hd <= 18 || dt <= 2) {
-        current.push(curr);
-        continue;
-      }
+    const prev=sorted[i-1], curr=sorted[i];
+    const dt=(curr.date-prev.date)/1000;
+    if (dt<=6) {
+      const hd=(prev.pHash&&curr.pHash)?hammingDistance(prev.pHash,curr.pHash):0;
+      if (hd<=18||dt<=2){cur.push(curr);continue;}
     }
-    if (current.length >= 2) groups.push(current);
-    current = [curr];
+    if (cur.length>=2) groups.push(cur); cur=[curr];
   }
-  if (current.length >= 2) groups.push(current);
-
-  // Newest group first
-  return groups.sort((a,b) => b[0].date - a[0].date);
-}
-
-// ══════════════════════════════════════════════════════════════
-// SCORING
-// ══════════════════════════════════════════════════════════════
-
-async function scorePhoto(photo) {
-  const img = await loadImg(photo.url);
-  const canvas = getAnalysisCanvas(img);
-  const ctx = canvas.getContext('2d');
-  const id = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-  const sharpness   = computeSharpness(id);
-  const exposure    = computeExposure(id);
-  const composition = computeComposition(id);
-  const pHash       = computePerceptualHash(img);
-
-  photo.pHash = pHash;
-
-  // Face scoring is added later if face models are loaded
-  photo.score = { sharpness, exposure, composition, faceQuality: null, faceCount: 0 };
-  photo.score.overall = computeOverall(photo.score);
-}
-
-function computeOverall(s) {
-  if (s.faceQuality !== null && s.faceCount > 0) {
-    return s.sharpness*0.25 + s.exposure*0.25 + s.faceQuality*0.35 + s.composition*0.15;
-  }
-  return s.sharpness*0.35 + s.exposure*0.35 + s.composition*0.30;
-}
-
-// ══════════════════════════════════════════════════════════════
-// FACE DETECTION (face-api.js, loaded on demand)
-// ══════════════════════════════════════════════════════════════
-
-const MODEL_URL = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights';
-
-async function loadFaceModels() {
-  if (S.faceModelsLoaded) return true;
-  if (S.faceModelsLoading) {
-    // Wait for it
-    while (S.faceModelsLoading) await delay(200);
-    return S.faceModelsLoaded;
-  }
-  S.faceModelsLoading = true;
-  try {
-    // Load face-api.js script if not present
-    if (!window.faceapi) {
-      await new Promise((res, rej) => {
-        const s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js';
-        s.onload = res; s.onerror = rej;
-        document.head.appendChild(s);
-      });
-    }
-    await Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),
-      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-    ]);
-    S.faceModelsLoaded = true;
-    S.faceModelsLoading = false;
-    return true;
-  } catch(e) {
-    S.faceModelsLoading = false;
-    return false;
-  }
-}
-
-async function scoreFaces(photo) {
-  if (!S.faceModelsLoaded) return;
-  try {
-    const img = await loadImg(photo.url);
-    const results = await faceapi
-      .detectAllFaces(img, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.35 }))
-      .withFaceLandmarks(true)
-      .withFaceDescriptors();
-
-    if (!results.length) { photo.score.faceCount = 0; return; }
-
-    // Quality proxy: avg detection score + face-size ratio
-    let qualSum = 0;
-    for (const r of results) {
-      const faceArea = (r.detection.box.width * r.detection.box.height) /
-                       (img.naturalWidth * img.naturalHeight);
-      const sizeFactor = Math.min(faceArea / 0.04, 1.0); // 4% of frame = score 1
-      qualSum += r.detection.score * 0.6 + sizeFactor * 0.4;
-    }
-    photo.score.faceQuality = qualSum / results.length;
-    photo.score.faceCount   = results.length;
-    photo.score.faceDescriptors = results.map(r => r.descriptor);
-    photo.score.overall = computeOverall(photo.score);
-  } catch(e) {}
-}
-
-async function getFaceCrops() {
-  // Collect one representative face per apparent person across all photos
-  const seen = [];
-  const crops = [];
-
-  for (const photo of S.photos) {
-    if (!photo.score?.faceDescriptors) continue;
-    const img = await loadImg(photo.url);
-    const results = await faceapi
-      .detectAllFaces(img, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.45 }))
-      .withFaceLandmarks(true)
-      .withFaceDescriptors();
-
-    for (const r of results) {
-      const isDup = seen.some(d => faceapi.euclideanDistance(d, r.descriptor) < 0.55);
-      if (isDup) continue;
-      seen.push(r.descriptor);
-
-      // Crop face
-      const box = r.detection.box;
-      const pad = 0.3;
-      const c = document.createElement('canvas');
-      c.width = c.height = 72;
-      const ctx = c.getContext('2d');
-      ctx.beginPath();
-      ctx.arc(36, 36, 36, 0, Math.PI*2);
-      ctx.clip();
-      ctx.drawImage(img,
-        box.x - box.width*pad, box.y - box.height*pad,
-        box.width*(1+2*pad), box.height*(1+2*pad),
-        0, 0, 72, 72
-      );
-      crops.push({ cropUrl: c.toDataURL(), descriptor: r.descriptor });
-      if (crops.length >= 20) return crops;
-    }
-  }
-  return crops;
+  if (cur.length>=2) groups.push(cur);
+  return groups.sort((a,b)=>b[0].date-a[0].date);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -818,58 +686,88 @@ async function getFaceCrops() {
 // ══════════════════════════════════════════════════════════════
 
 async function handleFiles(files) {
-  if (!files || !files.length) return;
+  if (!files||!files.length) return;
   showScreen('processing');
-  setProgress(0, 'Reading photo info…');
+  setProgress(0,'Reading photo info…');
 
-  // Phase 1 – read dates and create photo objects
-  S.photos = [];
-  S.groups = [];
+  S.photos=[]; S.groups=[];
+  const arr=Array.from(files);
 
-  const fileArr = Array.from(files);
-  for (let i=0; i<fileArr.length; i++) {
-    const file = fileArr[i];
+  // Phase 1 – read dates
+  for (let i=0;i<arr.length;i++) {
+    const file=arr[i];
     if (!file.type.startsWith('image/')) continue;
-    const url  = URL.createObjectURL(file);
-    const date = await getPhotoDate(file);
-    S.photos.push({ file, url, date, pHash: null, score: null });
-    setProgress(i / fileArr.length * 0.2, `Reading metadata ${i+1}/${fileArr.length}`);
+    const url=URL.createObjectURL(file);
+    const date=await getPhotoDate(file);
+    S.photos.push({file,url,date,pHash:null,score:null});
+    setProgress(i/arr.length*0.15,`Reading metadata ${i+1}/${arr.length}`);
   }
+  if (!S.photos.length){resetApp();return;}
 
-  if (!S.photos.length) { resetApp(); return; }
-
-  // Phase 2 – quick pHash pass for grouping (low-res thumbnails)
-  setProgress(0.2, 'Computing visual fingerprints…');
-  for (let i=0; i<S.photos.length; i++) {
-    const p = S.photos[i];
+  // Phase 2 – pHash for grouping
+  setProgress(0.15,'Computing visual fingerprints…');
+  for (let i=0;i<S.photos.length;i++) {
     try {
-      const img = await loadImg(p.url);
-      p.pHash = computePerceptualHash(img);
-    } catch(e) {}
-    setProgress(0.2 + i/S.photos.length*0.2, `Fingerprinting ${i+1}/${S.photos.length}`);
+      const img=await loadImg(S.photos[i].url);
+      S.photos[i].pHash=computePerceptualHash(img);
+    } catch(e){}
+    setProgress(0.15+i/S.photos.length*0.15,`Fingerprinting ${i+1}/${S.photos.length}`);
   }
 
-  // Phase 3 – grouping
-  setProgress(0.4, 'Grouping similar photos…');
-  S.groups = groupPhotos(S.photos);
+  // Phase 3 – group
+  setProgress(0.30,'Grouping similar photos…');
+  S.groups=groupPhotos(S.photos);
+  if (!S.groups.length){showScreen('results');renderResults();return;}
 
-  if (!S.groups.length) {
-    showScreen('results');
-    renderResults();
-    return;
+  // Phase 4 – score (with face matching if reference set)
+  const allPhotos=S.groups.flat();
+  const useFace=S.referenceFace && S.faceModelsLoaded;
+
+  for (let i=0;i<allPhotos.length;i++) {
+    await scorePhoto(allPhotos[i], useFace);
+    setProgress(0.30+i/allPhotos.length*0.70,`Scoring ${i+1}/${allPhotos.length}…`);
   }
 
-  // Phase 4 – score all photos in groups
-  const allInGroups = S.groups.flat();
-  for (let i=0; i<allInGroups.length; i++) {
-    await scorePhoto(allInGroups[i]);
-    setProgress(0.4 + i/allInGroups.length*0.6, `Scoring ${i+1}/${allInGroups.length}`);
-  }
-
-  setProgress(1, 'Done!');
+  setProgress(1,'Done!');
   await delay(300);
   showScreen('results');
   renderResults();
+  showRefIndicator();
+}
+
+async function scorePhoto(photo, matchFace=false) {
+  const img=await loadImg(photo.url);
+  const canvas=getCanvas(img);
+  const id=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height);
+
+  const sharpness  =computeSharpness(id);
+  const exposure   =computeExposure(id);
+  const composition=computeComposition(id);
+  photo.pHash=photo.pHash||computePerceptualHash(img);
+
+  photo.score={sharpness,exposure,composition,faceQuality:null,faceCount:0,faceMatchScore:null};
+
+  if (matchFace) {
+    try {
+      const faces=await detectFaces(img);
+      photo.score.faceCount=faces.length;
+
+      if (faces.length>0) {
+        // Quality proxy: detection confidence
+        const avgConf=faces.reduce((s,f)=>s+f.score,0)/faces.length;
+        photo.score.faceQuality=avgConf;
+
+        // Match against reference face
+        const distances=faces.map(f=>faceapi.euclideanDistance(f.descriptor,S.referenceFace));
+        const best=Math.min(...distances);
+        // Convert distance → similarity score: <0.4 = great match, >0.7 = no match
+        photo.score.faceMatchScore=Math.max(0, Math.min(1, 1-(best/0.6)));
+        photo.score.matchedFace=(best<0.55);
+      }
+    } catch(e){}
+  }
+
+  photo.score.overall=computeOverall(photo.score);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -877,96 +775,88 @@ async function handleFiles(files) {
 // ══════════════════════════════════════════════════════════════
 
 function renderResults() {
-  const container = document.getElementById('groups-container');
-  const empty     = document.getElementById('empty-state');
-  const stats     = document.getElementById('results-stats');
+  const container=document.getElementById('groups-container');
+  const empty=document.getElementById('empty-state');
+  const stats=document.getElementById('results-stats');
 
-  const groups = filteredGroups();
-  const totalPhotos = groups.reduce((s,g)=>s+g.length, 0);
+  stats.textContent=`${S.groups.length} similar sets · ${S.groups.flat().length} photos`;
 
-  stats.textContent = `${groups.length} similar sets · ${totalPhotos} photos`;
-
-  if (!groups.length) {
-    container.innerHTML = '';
-    empty.classList.add('visible');
-    return;
+  if (!S.groups.length){
+    container.innerHTML=''; empty.classList.add('visible'); return;
   }
   empty.classList.remove('visible');
+  container.innerHTML=S.groups.map((g,gi)=>renderGroupHTML(g,gi)).join('');
 
-  container.innerHTML = groups.map((group, gi) => renderGroupHTML(group, gi)).join('');
-
-  // Animate score bars in after paint
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.sbar-fill').forEach(el => {
-      el.style.height = el.dataset.h;
-    });
-    document.querySelectorAll('.score-fill').forEach(el => {
-      el.style.width = el.dataset.w;
-    });
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.sbar-fill').forEach(el=>{ el.style.height=el.dataset.h; });
+    document.querySelectorAll('.score-fill').forEach(el=>{ el.style.width=el.dataset.w; });
   });
 }
 
-function filteredGroups() {
-  if (!S.referenceFace) return S.groups;
-  return S.groups.filter(group =>
-    group.some(p => p.score?.faceDescriptors?.some(d =>
-      faceapi.euclideanDistance(d, S.referenceFace) < 0.55
-    ))
-  );
+function showRefIndicator() {
+  const ind=document.getElementById('ref-indicator');
+  if (!S.referenceFace||!S.referenceCropUrl){ind.classList.remove('visible');return;}
+  document.getElementById('ref-indicator-img').src=S.referenceCropUrl;
+  const matchCount=S.groups.filter(g=>g.some(p=>p.score?.matchedFace)).length;
+  document.getElementById('ref-indicator-count').textContent=
+    `Face found in ${matchCount} of ${S.groups.length} batches`;
+  ind.classList.add('visible');
 }
 
 function bestInGroup(group) {
-  return group.reduce((best, p) =>
-    (p.score?.overall ?? 0) > (best.score?.overall ?? 0) ? p : best
-  );
+  return group.reduce((b,p)=>(p.score?.overall??0)>(b.score?.overall??0)?p:b);
 }
 
 function renderGroupHTML(group, gi) {
-  const best = bestInGroup(group);
-  const date = group[0].date.toLocaleString(undefined, { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+  const best=bestInGroup(group);
+  const hasFaceMatch=group.some(p=>p.score?.matchedFace);
+  const date=group[0].date.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  const bestPct=Math.round((best.score?.overall??0)*100);
 
-  const thumbsHTML = group.map((photo, pi) => {
-    const isBest   = photo === best;
-    const score    = photo.score;
-    const pct      = score ? Math.round(score.overall * 100) : '…';
-    const classes  = ['photo-thumb-wrap', isBest ? 'best' : 'discard'].join(' ');
+  const thumbs=group.map((photo,pi)=>{
+    const isBest=photo===best;
+    const s=photo.score;
+    const pct=s?Math.round(s.overall*100):'…';
+    const matched=s?.matchedFace;
 
-    const bars = score ? `
+    const bars=s?`
       <div class="score-bars">
-        ${sbarHTML(score.sharpness,   '#64d2ff')}
-        ${sbarHTML(score.exposure,    '#ffd60a')}
-        ${score.faceCount > 0 ? sbarHTML(score.faceQuality || 0, '#ff375f') : ''}
-        ${sbarHTML(score.composition, '#bf5af2')}
-      </div>` : '';
+        ${sbarHTML(s.sharpness,   '#64d2ff')}
+        ${sbarHTML(s.exposure,    '#ffd60a')}
+        ${s.faceMatchScore!==null&&s.faceMatchScore!==undefined?sbarHTML(s.faceMatchScore,'#0a84ff'):''}
+        ${sbarHTML(s.composition, '#bf5af2')}
+      </div>`:'';
 
-    return `<div class="${classes}" onclick="openLightbox(${gi},${pi})">
+    return `<div class="photo-thumb-wrap ${isBest?'best':'discard'}${isBest&&hasFaceMatch?' face-best':''}"
+                 onclick="openLightbox(${gi},${pi})">
       <img src="${photo.url}" loading="lazy" alt="">
       <div class="score-overlay">
-        <span class="score-pct">${pct}${score?'%':''}</span>
-        ${bars}
+        <span class="score-pct">${pct}${s?'%':''}</span>${bars}
       </div>
-      ${isBest ? '<span class="best-badge">BEST</span>' : ''}
-      ${score?.faceCount > 0 ? `<span class="face-badge">👤${score.faceCount > 1 ? score.faceCount : ''}</span>` : ''}
+      ${isBest?`<span class="best-badge${hasFaceMatch?' face-best':''}">BEST</span>`:''}
+      ${matched?'<span class="face-match-badge">👤✓</span>':''}
     </div>`;
   }).join('');
+
+  const badgeClass=hasFaceMatch?'group-badge face-match':'group-badge';
 
   return `<div class="group-card">
     <div class="group-header">
       <div>
-        <div class="group-meta">${date}</div>
+        <div class="group-meta">${date}${hasFaceMatch?' · 👤 face matched':''}</div>
         <div class="group-title">${group.length} similar photos</div>
       </div>
-      <div class="group-badge">Best: ${Math.round((best.score?.overall??0)*100)}%</div>
+      <div class="${badgeClass}">Best: ${bestPct}%</div>
     </div>
-    <div class="photo-grid">${thumbsHTML}</div>
+    <div class="photo-grid">${thumbs}</div>
     <div class="group-footer">
       <div class="btn-keep" onclick="showKeepGuide(${gi})">★ Which to Keep</div>
     </div>
   </div>`;
 }
 
-function sbarHTML(value, color) {
-  const h = Math.round((value ?? 0) * 14);
+function sbarHTML(value,color) {
+  const h=Math.round((value??0)*14);
   return `<div class="sbar" style="height:14px">
     <div class="sbar-fill" style="height:0;background:${color}" data-h="${h}px"></div>
   </div>`;
@@ -976,40 +866,42 @@ function sbarHTML(value, color) {
 // LIGHTBOX
 // ══════════════════════════════════════════════════════════════
 
-function openLightbox(gi, pi) {
-  const photo = S.groups[gi][pi];
-  const best  = bestInGroup(S.groups[gi]);
-  const isBest = photo === best;
+function openLightbox(gi,pi) {
+  const photo=S.groups[gi][pi];
+  const best=bestInGroup(S.groups[gi]);
+  const isBest=photo===best;
+  const s=photo.score;
 
-  document.getElementById('lightbox-img').src = photo.url;
+  document.getElementById('lightbox-img').src=photo.url;
 
-  const s = photo.score;
-  const scoreHTML = s ? `
+  const verdict=isBest
+    ? (photo.score?.matchedFace?'⭐ Best — face matched':'⭐ Best in batch')
+    : (photo.score?.matchedFace?'👤 Face found — but not the sharpest':'Not the best');
+
+  const scoreHTML=s?`
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-      <span style="font-size:15px;font-weight:700">${isBest ? '⭐ Best in batch' : 'Score breakdown'}</span>
+      <span style="font-size:14px;font-weight:700">${verdict}</span>
       <span style="font-size:22px;font-weight:800;color:${scoreColor(s.overall)}">${Math.round(s.overall*100)}%</span>
     </div>
-    ${scoreRowHTML('🔵', 'Sharpness',   s.sharpness,   '#64d2ff')}
-    ${scoreRowHTML('🟡', 'Exposure',    s.exposure,    '#ffd60a')}
-    ${s.faceCount > 0 ? scoreRowHTML('🩷', `Face quality (${s.faceCount})`, s.faceQuality??0, '#ff375f') : ''}
-    ${scoreRowHTML('🟣', 'Composition', s.composition, '#bf5af2')}
+    ${scoreRowHTML('🔵','Sharpness',s.sharpness,'#64d2ff')}
+    ${scoreRowHTML('🟡','Exposure',s.exposure,'#ffd60a')}
+    ${s.faceMatchScore!==null&&s.faceMatchScore!==undefined?scoreRowHTML('👤','Face match',s.faceMatchScore,'#0a84ff'):''}
+    ${s.faceQuality?scoreRowHTML('🩷','Face quality',s.faceQuality,'#ff375f'):''}
+    ${scoreRowHTML('🟣','Composition',s.composition,'#bf5af2')}
     <div style="margin-top:10px;padding:8px 10px;background:var(--card2);border-radius:8px;font-size:12px;color:var(--text2)">
-      ${isBest ? '✅ Keep this one — delete the others' : '🗑 Consider deleting this in the Photos app'}
-    </div>` : '<div style="color:var(--text2);font-size:14px">Scoring…</div>';
+      ${isBest?'✅ Keep this · delete the others in Photos app':'🗑 Consider deleting this in the Photos app'}
+    </div>`
+    :'<div style="color:var(--text2);font-size:14px">Scoring…</div>';
 
-  document.getElementById('lightbox-score').innerHTML = scoreHTML;
+  document.getElementById('lightbox-score').innerHTML=scoreHTML;
   document.getElementById('lightbox').classList.add('open');
-
-  // Animate bars
-  requestAnimationFrame(() => {
-    document.querySelectorAll('#lightbox-score .score-fill').forEach(el => {
-      el.style.width = el.dataset.w;
-    });
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('#lightbox-score .score-fill').forEach(el=>{el.style.width=el.dataset.w;});
   });
 }
 
-function scoreRowHTML(icon, label, value, color) {
-  const pct = Math.round(value*100);
+function scoreRowHTML(icon,label,value,color) {
+  const pct=Math.round((value??0)*100);
   return `<div class="score-row">
     <span class="score-icon">${icon}</span>
     <div class="score-bar-wrap">
@@ -1021,148 +913,52 @@ function scoreRowHTML(icon, label, value, color) {
   </div>`;
 }
 
-function scoreColor(v) {
-  if (v >= 0.75) return 'var(--accent)';
-  if (v >= 0.5)  return 'var(--orange)';
-  return 'var(--red)';
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-}
+function scoreColor(v){ return v>=.75?'var(--accent)':v>=.5?'var(--orange)':'var(--red)'; }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
 
 // ══════════════════════════════════════════════════════════════
 // KEEP GUIDE
 // ══════════════════════════════════════════════════════════════
 
 function showKeepGuide(gi) {
-  const group = S.groups[gi];
-  const best  = bestInGroup(group);
-  const discard = group.filter(p => p !== best);
-
-  const bestTime = best.date.toLocaleTimeString(undefined, { hour:'2-digit', minute:'2-digit', second:'2-digit' });
-  const discardTimes = discard.map(p =>
-    p.date.toLocaleTimeString(undefined, { hour:'2-digit', minute:'2-digit', second:'2-digit' })
-  ).join(', ');
-
-  alert(
-    `★ KEEP (${Math.round((best.score?.overall??0)*100)}% score)\n` +
-    `Taken at ${bestTime}\n\n` +
-    `🗑 DELETE from Photos app:\n` +
-    `${discard.length} photo${discard.length>1?'s':''} taken at ${discardTimes}`
-  );
+  const g=S.groups[gi], best=bestInGroup(g), discard=g.filter(p=>p!==best);
+  const fmt=d=>d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  alert(`★ KEEP (score ${Math.round((best.score?.overall??0)*100)}%)\nTaken at ${fmt(best.date)}`
+    +`${best.score?.matchedFace?' · 👤 face matched':''}\n\n`
+    +`🗑 DELETE from Photos app:\n${discard.length} photo${discard.length>1?'s':''} `
+    +`at ${discard.map(p=>fmt(p.date)).join(', ')}`);
 }
 
 // ══════════════════════════════════════════════════════════════
-// FACE FEATURE
+// NAV
 // ══════════════════════════════════════════════════════════════
 
-async function openFaceModal() {
-  document.getElementById('face-modal').classList.add('open');
-  document.getElementById('face-grid').innerHTML = '<div class="face-loading">Loading face detection models…</div>';
-
-  const ok = await loadFaceModels();
-  if (!ok) {
-    document.getElementById('face-grid').innerHTML =
-      '<div class="face-loading" style="color:var(--red)">Could not load face models (check internet connection)</div>';
-    return;
-  }
-
-  // Score faces for all photos (if not done yet)
-  document.getElementById('face-grid').innerHTML = '<div class="face-loading">Detecting faces…</div>';
-  for (const p of S.groups.flat()) {
-    if (p.score && p.score.faceDescriptors === undefined) {
-      await scoreFaces(p);
-    }
-  }
-
-  // Re-render groups with face scores
-  renderResults();
-
-  // Build face crops
-  const crops = await getFaceCrops();
-  if (!crops.length) {
-    document.getElementById('face-grid').innerHTML =
-      '<div class="face-loading">No faces detected in these photos</div>';
-    return;
-  }
-
-  S.faceDescriptors = crops;
-  const html = crops.map((c, i) => `
-    <div class="face-cell" id="fc-${i}">
-      <img class="face-avatar" src="${c.cropUrl}" onclick="selectFace(${i})">
-    </div>`).join('');
-  document.getElementById('face-grid').innerHTML = html;
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
 }
 
-function selectFace(i) {
-  document.querySelectorAll('.face-cell').forEach(el => el.classList.remove('selected'));
-  document.getElementById(`fc-${i}`)?.classList.add('selected');
-  S.referenceFace = S.faceDescriptors[i].descriptor;
-
-  const count = filteredGroups().length;
-  document.getElementById('face-banner-text').textContent =
-    `Face filter: ${count} batch${count!==1?'es':''} contain this person`;
-  document.getElementById('face-banner').classList.add('visible');
-  document.getElementById('face-btn').classList.add('active');
-
-  closeFaceModal();
-  renderResults();
+function setProgress(ratio,label){
+  const pct=Math.round(ratio*100);
+  document.getElementById('ring-arc').style.strokeDashoffset=283-283*ratio;
+  document.getElementById('ring-pct').textContent=pct+'%';
+  document.getElementById('proc-label').textContent=label;
 }
 
-function clearFaceFilter() {
-  S.referenceFace = null;
-  document.getElementById('face-banner').classList.remove('visible');
-  document.getElementById('face-btn').classList.remove('active');
-  document.querySelectorAll('.face-cell').forEach(el => el.classList.remove('selected'));
-  renderResults();
-}
-
-function closeFaceModal() {
-  document.getElementById('face-modal').classList.remove('open');
-}
-
-// ══════════════════════════════════════════════════════════════
-// NAVIGATION
-// ══════════════════════════════════════════════════════════════
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
-}
-
-function setProgress(ratio, label) {
-  const pct = Math.round(ratio * 100);
-  const circumference = 283;
-  document.getElementById('ring-arc').style.strokeDashoffset =
-    circumference - circumference * ratio;
-  document.getElementById('ring-pct').textContent = pct + '%';
-  document.getElementById('proc-label').textContent = label;
-}
-
-function resetApp() {
-  // Revoke object URLs to free memory
-  S.photos.forEach(p => URL.revokeObjectURL(p.url));
-  S.photos = []; S.groups = [];
-  S.referenceFace = null; S.faceDescriptors = [];
-  document.getElementById('face-banner').classList.remove('visible');
-  document.getElementById('face-btn').classList.remove('active');
-  document.getElementById('file-input').value = '';
+function resetApp(){
+  S.photos.forEach(p=>URL.revokeObjectURL(p.url));
+  S.photos=[]; S.groups=[];
+  // Keep reference face — user may want to reuse it
+  document.getElementById('file-input').value='';
+  document.getElementById('ref-indicator').classList.remove('visible');
   showScreen('welcome');
 }
 
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-// Keyboard / swipe close for modals
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeLightbox(); closeFaceModal(); }
-});
-document.getElementById('face-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeFaceModal();
-});
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this || e.target === document.getElementById('lightbox-img'))
-    closeLightbox();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+document.getElementById('lightbox').addEventListener('click',function(e){
+  if(e.target===this||e.target===document.getElementById('lightbox-img'))closeLightbox();
 });
 </script>
 </body>
